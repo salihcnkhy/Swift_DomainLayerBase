@@ -42,12 +42,10 @@ open class UseCasePublisher<Input, Output, Failure: Error, Repository>: Publishe
     }
     
     private func getPublisher() -> AnyPublisher<Output, Failure> {
-        if currentPublisher == nil {
-            if let request = request {
-                currentPublisher = createAnyPublisher(request: request)
-            } else {
-                currentPublisher = createAnyPublisher()
-            }
+        if let request = request {
+            currentPublisher = createAnyPublisher(request: request)
+        } else {
+            currentPublisher = createAnyPublisher()
         }
         
         return currentPublisher
