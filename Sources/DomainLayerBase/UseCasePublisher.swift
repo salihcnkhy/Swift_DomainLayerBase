@@ -22,15 +22,15 @@ open class UseCasePublisher<Input, Output, Failure: Error, Repository>: Publishe
     public func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
         getPublisher()
             .handleEvents(receiveSubscription: { subscription in
-                Swift.print("Subscription", subscription)
+                Swift.print("Usecase Subscription")
             }, receiveOutput: { output in
-                Swift.print("Output", output)
+                Swift.print("Usecase Output")
             }, receiveCompletion: { completion in
-                Swift.print("Completion", completion)
+                Swift.print("Usecase Completion", completion)
             }, receiveCancel: {
-                Swift.print("Cancel Received")
+                Swift.print("Usecase Cancel Received")
             }, receiveRequest: { demand in
-                Swift.print("Demand", demand)
+                Swift.print("Usecase Demand", demand)
             })
             .eraseToAnyPublisher()
             .receive(subscriber: subscriber)
